@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {FirebaseService} from './firebase.service';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {auth} from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +9,17 @@ import {FirebaseService} from './firebase.service';
 export class AppComponent {
   public user;
 
-  constructor(private firebaseService: FirebaseService) {
+  constructor(public afAuth: AngularFireAuth) {
   }
 
-  public login(): void {
-    this.firebaseService.login().then((result) => {
-      this.user = result.user;
+  public async login() {
+    const result = await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.user = result.user;
+  }
+
+  public logout() {
+    this.afAuth.auth.signOut().then(() => {
+      this.user = null;
     });
-  }
-
-  public logout(): void {
-    console.log('logout on hosting');
   }
 }
