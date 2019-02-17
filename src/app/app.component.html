@@ -1,8 +1,14 @@
 <button (click)="login()">Login</button>
 <button (click)="logout()">Logout</button>
-<div>
-  <section *ngIf="user">
-    <img [src]="user.photoURL" alt="avatar">
-    <p>{{user.displayName}}</p>
-  </section>
-</div>
+<section *ngIf="user">
+  <img [src]="user.photoURL" alt="avatar">
+  <p>{{user.displayName}}</p>
+</section>
+<section>
+  <article *ngFor="let todo of todos | async">
+    <header>{{todo.header}}</header>
+    <p>{{todo.description}}</p>
+    <input type="checkbox" [checked]="todo.done" (change)="toggleTodo(todo)">
+  </article>
+</section>
+<button (click)="addTodo()">Add todo</button>
