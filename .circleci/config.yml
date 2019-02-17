@@ -16,8 +16,6 @@ jobs:
 
     working_directory: ~/repo
 
-    context: circleci-firebase
-
     steps:
       - checkout
 
@@ -47,11 +45,13 @@ jobs:
           root: ~/repo
           paths: dist
 
-      - attach_workspace:
-          at: ~/repo
-      - store_artifacts:
-          path: ./dist/
-      - run: npm install firebase-tools
       - run:
           name: Deploy to Firebase hosting
           command: ./node_modules/.bin/firebase deploy --only hosting --token $FIREBASE_TOKEN
+
+workflows:
+  version: 2
+  my_flow:
+    jobs:
+      - build:
+          context: circleci-firebase
