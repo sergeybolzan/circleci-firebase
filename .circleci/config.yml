@@ -16,6 +16,8 @@ jobs:
 
     working_directory: ~/repo
 
+    context: circleci-firebase
+
     steps:
       - checkout
 
@@ -44,3 +46,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths: dist
+
+      - run:
+          name: Deploy to Firebase hosting
+          command: ./node_modules/.bin/firebase deploy --only hosting --token $FIREBASE_TOKEN
