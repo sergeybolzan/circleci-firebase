@@ -1,8 +1,11 @@
-<div>
+<div class="header">
   <nav>
     <a routerLink="/" routerLinkActive="active">Home</a>
+    <a routerLink="/secret" routerLinkActive="active" *ngIf="isAuthenticate()">Secret</a>
+  </nav>
+  <nav>
+    <div *ngIf="isAuthenticate()">{{afAuth.auth.currentUser.displayName}}</div>
     <a routerLink="/login" routerLinkActive="active" *ngIf="!isAuthenticate()">Login</a>
     <a routerLink="/" routerLinkActive="active" (click)="logout()" *ngIf="isAuthenticate()">Logout</a>
-    <a routerLink="/secret" routerLinkActive="active" *ngIf="isAuthenticate()">Secret</a>
   </nav>
 </div>

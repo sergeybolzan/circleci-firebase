@@ -3,7 +3,6 @@ import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firest
 import {Observable} from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {map} from 'rxjs/operators';
-import {auth} from 'firebase';
 import {Todo, User} from '../app.component';
 
 @Component({
@@ -25,16 +24,6 @@ export class HomeComponent {
       }))
     );
   }
-
-  // public async login() {
-  //   const result = await this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-  //   this.user = result.user;
-  // }
-  //
-  // public async logout() {
-  //   await this.afAuth.auth.signOut();
-  //   this.user = null;
-  // }
 
   public toggleTodo(todo: Todo): void {
     this.todosCollection.doc(todo.id).update({done: !todo.done}).catch(() => console.log('Missing permissions'));
