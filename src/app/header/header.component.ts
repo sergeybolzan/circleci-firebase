@@ -17,4 +17,8 @@ export class HeaderComponent implements OnInit {
     await this.afAuth.auth.signOut();
   }
 
+  isAuthenticate(): boolean {
+    return !!this.afAuth.auth.currentUser;
+  }
+
 }

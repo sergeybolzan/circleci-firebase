@@ -1,7 +1,8 @@
 <div>
   <nav>
     <a routerLink="/" routerLinkActive="active">Home</a>
-    <a routerLink="/login" routerLinkActive="active">Login</a>
-    <a routerLink="/" routerLinkActive="active" (click)="logout()">Logout</a>
+    <a routerLink="/login" routerLinkActive="active" *ngIf="!isAuthenticate()">Login</a>
+    <a routerLink="/" routerLinkActive="active" (click)="logout()" *ngIf="isAuthenticate()">Logout</a>
+    <a routerLink="/secret" routerLinkActive="active" *ngIf="isAuthenticate()">Secret</a>
   </nav>
 </div>
